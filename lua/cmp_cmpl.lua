@@ -43,7 +43,7 @@ local create_job = function(self)
   })
   local job_pid = vim.fn.jobpid(id)
 
-  print("started job " .. id .. " on pid " .. job_pid)
+  print("cmp-cmpl: started job " .. id .. " on pid " .. job_pid)
   return id
 end
 
@@ -102,7 +102,7 @@ source.build_input = function(word)
     Delay = '0ms',
   }
   local jinput = vim.fn.json_encode(input)
-  print(jinput)
+  -- print(jinput)
   return jinput .. "\n"
 end
 
