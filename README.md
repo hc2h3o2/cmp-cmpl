@@ -7,7 +7,7 @@ Completion source for cmpl.com/hrsh7th/nvim-cmp).
 ## Usage
 
 ```lua
-require("packer").use({ "akemrir/cmp-cmpl" })
+require("packer").use({ "hc2h3o2/cmp-cmpl" })
 
 cmp.setup({
   sources = cmp.config.sources({
