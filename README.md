@@ -1,17 +1,17 @@
 <!-- cSpell:ignore nvim -->
 
-# `cmp-cmpl`
+# `cmp-fif`
 
-Completion source for cmpl.com/hrsh7th/nvim-cmp).
+Completion source for github.com/hrsh7th/nvim-cmp
 
 ## Usage
 
 ```lua
-require("packer").use({ "hc2h3o2/cmp-cmpl" })
+require("packer").use({ "hc2h3o2/cmp-fif" })
 
 cmp.setup({
   sources = cmp.config.sources({
-    { name = 'cmpl' }
+    { name = 'fif' }
   })
 })
 ```

@@ -1,7 +1,7 @@
 local source = {}
 
 local create_job = function(self)
-  local id = vim.fn.jobstart({ "cmpl-n" }, {
+  local id = vim.fn.jobstart({ "fif-n" }, {
     on_stdout = function(_, data)
       for _, line in ipairs(data) do
         if line ~= "" then
@@ -43,7 +43,7 @@ local create_job = function(self)
   })
   local job_pid = vim.fn.jobpid(id)
 
-  print("cmp-cmpl: started job " .. id .. " on pid " .. job_pid)
+  print("cmp-fif: started job " .. id .. " on pid " .. job_pid)
   return id
 end
 
@@ -52,22 +52,22 @@ source.new = function()
     __index = source,
   })
   -- self.output_buffer = {}
-  self.cmpl_job = create_job(self)
+  self.fif_job = create_job(self)
   return self
 end
 
 source.reset = function(self)
-  vim.fn.jobstop(self.cmpl_job)
+  vim.fn.jobstop(self.fif_job)
   -- self.output_buffer = {}
-  self.cmpl_job = create_job(self)
+  self.fif_job = create_job(self)
 end
 
 -- source.is_available = function()
---   return vim.bo.filetype == "cmpl"
+--   return vim.bo.filetype == "fif"
 -- end
 
 source.get_debug_name = function()
-  return "cmpl"
+  return "fif"
 end
 
 source.get_keyword_pattern = function(_)
@@ -114,7 +114,7 @@ source.complete = function(self, params, callback)
       word = k
     end
 
-    vim.fn.chansend(self.cmpl_job, self.build_input(word))
+    vim.fn.chansend(self.fif_job, self.build_input(word))
     self.callback = callback
   end
 end
