@@ -1,6 +1,6 @@
 <!-- cSpell:ignore nvim -->
 
-# `cmp-fif`
+# `cmp-fif` Find in files
 
 Completion source for github.com/hrsh7th/nvim-cmp
 
