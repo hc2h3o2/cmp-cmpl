@@ -15,3 +15,32 @@ cmp.setup({
   })
 })
 ```
+
+## Sample sources function override
+
+```
+function fif_get_sources()
+  local sources = {}
+  local tags = table.concat(vim.opt.tags:get(), ',')
+  local dicts = table.concat(vim.opt.dictionary:get(), ',')
+  if dicts ~= "" then
+    table.insert(sources, {
+      limit = 50,
+      type = 'dict',
+      icon = '◫',
+      files = dicts,
+    })
+  end
+  if tags ~= "" then
+    table.insert(sources, {
+      limit = 50,
+      type = 'tags',
+      icon = '⌘',
+      files = tags
+    })
+  end
+  return sources
+end
+
+vim.g.fif_get_sources
+```

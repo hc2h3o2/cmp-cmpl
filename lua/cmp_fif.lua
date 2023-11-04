@@ -74,7 +74,7 @@ source.get_keyword_pattern = function(_)
   return [[.]]
 end
 
-source.build_input = function(word)
+source.default_sources = function()
   local sources = {}
   local tags = table.concat(vim.opt.tags:get(), ',')
   local dicts = table.concat(vim.opt.dictionary:get(), ',')
@@ -94,6 +94,12 @@ source.build_input = function(word)
       files = tags
     })
   end
+  return sources
+end
+
+source.build_input = function(word)
+  local get_sources = vim.g.fif_get_sources or source.default_sources
+  local sources = get_sources()
 
   local input = {
     Cword = word,
