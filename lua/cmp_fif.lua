@@ -100,6 +100,14 @@ end
 source.build_input = function(word)
   local get_sources = vim.g.fif_get_sources or source.default_sources
   local sources = get_sources()
+  -- for key, value in pairs(sources) do
+  --   print(key)
+  --   print(value)
+  --   for k, v in pairs(value) do
+  --     print(k)
+  --     print(v)
+  --   end
+  -- end
 
   local input = {
     Cword = word,
