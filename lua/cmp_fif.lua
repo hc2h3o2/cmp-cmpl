@@ -134,4 +134,15 @@ source.complete = function(self, params, callback)
   end
 end
 
+source.setup = function(opts)
+  for key, value in pairs(opts) do
+    print(key)
+    print(value)
+    for k, v in pairs(value) do
+      print(k)
+      print(v)
+    end
+  end
+end
+
 return source
