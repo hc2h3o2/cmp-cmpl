@@ -9,6 +9,13 @@ Completion source for github.com/hrsh7th/nvim-cmp
 ```lua
 require("packer").use({ "hc2h3o2/cmp-fif" })
 
+require("packer").use({ "hc2h3o2/cmp-fif", config = function()
+  require("cmp-fif").setup({
+    fif_command = { "fif-n", "--completion" }
+  })
+end)
+})
+
 cmp.setup({
   sources = cmp.config.sources({
     { name = 'fif' }

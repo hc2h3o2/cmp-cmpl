@@ -1,7 +1,16 @@
 local source = {}
+local config = require "cmp-fif.config"
 
 local create_job = function(self)
-  local command = vim.g.fif_command or { "fif-n" }
+  -- print('fif#create_job')
+  local command = config.fif_command
+  -- for _, value in pairs(config) do
+  --   print(value)
+  --   for k, v in pairs(value) do
+  --     print(k)
+  --     print(v)
+  --   end
+  -- end
   local id = vim.fn.jobstart(command, {
     on_stdout = function(_, data)
       for _, line in ipairs(data) do
@@ -44,7 +53,7 @@ local create_job = function(self)
   })
   local job_pid = vim.fn.jobpid(id)
 
-  print("cmp-fif: started job " .. id .. " on pid " .. job_pid)
+  print("cmp-fif: started job '" .. table.concat(config.fif_command, " ") .. "' with id " .. id .. " on pid " .. job_pid)
   return id
 end
 
@@ -52,15 +61,15 @@ source.new = function()
   local self = setmetatable({}, {
     __index = source,
   })
-  -- self.output_buffer = {}
   self.fif_job = create_job(self)
+  self.config = config
   return self
 end
 
 source.reset = function(self)
   vim.fn.jobstop(self.fif_job)
-  -- self.output_buffer = {}
   self.fif_job = create_job(self)
+  self.config = config
 end
 
 -- source.is_available = function()
@@ -135,14 +144,28 @@ source.complete = function(self, params, callback)
 end
 
 source.setup = function(opts)
-  for key, value in pairs(opts) do
-    print(key)
-    print(value)
-    for k, v in pairs(value) do
-      print(k)
-      print(v)
+  -- print('fif#setup')
+  if source.contains(opts, "fif_command") then
+    -- print('fif# passed opts contains fif_command')
+    config.fif_command = opts.fif_command
+  end
+  -- for key, value in pairs(opts) do
+  --   print(key)
+  --   print(value)
+  --   for k, v in pairs(value) do
+  --     print(k)
+  --     print(v)
+  --   end
+  -- end
+end
+
+source.contains = function(table, element)
+  for key, _ in pairs(table) do
+    if key == element then
+      return true
     end
   end
+  return false
 end
 
 return source
