@@ -42,5 +42,6 @@ function fif_get_sources()
   return sources
 end
 
-vim.g.fif_get_sources
+vim.g.fif_get_sources = fif_get_sources
+vim.g.fif_command = {"fif-n", "--complete"}
 ```
