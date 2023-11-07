@@ -15,6 +15,7 @@ local create_job = function(self)
     on_stdout = function(_, data)
       for _, line in ipairs(data) do
         -- print(line)
+        local complete_items = {}
         if line ~= "" then
           local jitems = vim.fn.json_decode(line)
           if jitems ~= nil then
