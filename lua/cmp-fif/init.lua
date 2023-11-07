@@ -14,8 +14,21 @@ local create_job = function(self)
   local id = vim.fn.jobstart(command, {
     on_stdout = function(_, data)
       for _, line in ipairs(data) do
-        if line ~= "" and string.find(line, "%[%]") == nil then
-          local complete_items = {}
+        -- print("line before")
+        -- print(line)
+        local complete_items = {}
+        while true do
+          if line:match("^%[%]%[") then
+            line = line:sub(3, -1)
+          else
+            break
+          end
+        end
+        -- print("line after")
+        -- print(line)
+        -- print("-----")
+
+        if line ~= "" then
           local jitems = vim.fn.json_decode(line)
           if jitems ~= nil then
             for _, jitem in ipairs(jitems) do
@@ -46,8 +59,8 @@ local create_job = function(self)
               })
             end
           end
-          self.callback(complete_items)
         end
+        self.callback(complete_items)
       end
     end,
   })
