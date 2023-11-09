@@ -1,0 +1,13 @@
+---
+session_name: cmp-fif
+start_directory: ~/code/cmp-fif
+
+windows:
+  - window_name: observe
+    panes:
+      - nvim README.md
+
+  - window_name: editor
+    panes:
+      - nvim -S session.vim
+      - blank
