@@ -54,17 +54,7 @@ local create_job = function(self)
 	})
 	local job_pid = vim.fn.jobpid(id)
 
-	vim.notify(
-		"cmp-fif: started job '"
-			.. table.concat(config.fif_command, " ")
-			.. "' with id "
-			.. id
-			.. " on pid "
-			.. job_pid
-			.. " check logs: 'tail -F /tmp/fif-"
-			.. job_pid
-			.. ".log'"
-	)
+	vim.notify(table.concat(config.fif_command, " ") .. ":" .. id .. ":/tmp/fif-" .. job_pid .. ".log'")
 	return id
 end
 
