@@ -54,7 +54,7 @@ local create_job = function(self)
 	})
 	local job_pid = vim.fn.jobpid(id)
 
-	vim.notify(table.concat(config.fif_command, " ") .. ":" .. id .. ":/tmp/fif-" .. job_pid .. ".log'")
+	vim.notify(table.concat(config.fif_command, " ") .. ":" .. id .. ":/tmp/fifn-" .. job_pid .. ".log'")
 	return id
 end
 
