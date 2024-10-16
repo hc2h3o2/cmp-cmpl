@@ -52,6 +52,7 @@ local create_job = function(self)
 				else
 					-- print("\tempty line")
 				end
+				-- print(vim.inspect(complete_items))
 				-- print("\t", #complete_items)
 				self.callback(complete_items)
 			end
@@ -124,6 +125,10 @@ fif.setup = function(opts)
 		return [[.]]
 	end
 
+	source.default_limit = function()
+		return 100
+	end
+
 	source.default_sources = function()
 		local sources = {}
 		local tags = table.concat(vim.opt.tags:get(), ",")
@@ -149,6 +154,7 @@ fif.setup = function(opts)
 
 	source.build_input = function(word)
 		local get_sources = vim.g.fif_get_sources or source.default_sources
+		local get_limit = vim.g.fif_get_limit or source.default_limit
 		local sources = get_sources()
 		-- for key, value in pairs(sources) do
 		-- 	print(key)
@@ -160,6 +166,7 @@ fif.setup = function(opts)
 		-- end
 
 		local input = {
+			Limit = get_limit,
 			Cword = word,
 			Sources = sources,
 			Comment = "Complete current word Cword",
