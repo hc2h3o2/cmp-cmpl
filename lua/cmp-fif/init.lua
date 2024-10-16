@@ -156,6 +156,7 @@ fif.setup = function(opts)
 		local get_sources = vim.g.fif_get_sources or source.default_sources
 		local get_limit = vim.g.fif_get_limit or source.default_limit
 		local sources = get_sources()
+		local limit = get_limit()
 		-- for key, value in pairs(sources) do
 		-- 	print(key)
 		-- 	print(value)
@@ -166,7 +167,7 @@ fif.setup = function(opts)
 		-- end
 
 		local input = {
-			Limit = get_limit,
+			Limit = limit,
 			Cword = word,
 			Sources = sources,
 			Comment = "Complete current word Cword",
